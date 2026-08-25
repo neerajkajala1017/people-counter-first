@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>People Detector</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="/static/css/main.css" />
+    </head>
+
+    <body>
+
+        <div id = "spinner">
+            <div class="spinner-ring"></div>
+            <p class="spinner-text">Running detection...</p>
+        </div>
+
+        <div id="toast"></div>
+
+        <div class = "shell">
+            
+            <header class="page-header">
+                <div class="icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="7" r="4"/>
+                        <path d="M5.2 20a7 7 0 0 1 13.6 0"/>
+                        <rect x="1" y="3" width="22" height="18" rx="3"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1>People Detection Dashboard</h1>
+                    <p>Upload a video and detect people in real time using YOLOv8</p>
+                </div>
+            </header>
+
+            <div id="error-banner"></div>
+
+            <div class="card" style="margin-bottom:20px;">
+                <p class="card-title">Controls</p>
+
+                <div class="controls">
+                    <input type="file" id="file-input" accept="video/*"/>
+                    <label id="upload-label" class="upload-label" for="file-input">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        Upload Video
+                    </label>
+
+                    <span id="file-name-chip"></span>
+
+                    <button id="btn-process" class="btn btn-primary" disabled>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                        Process Video
+                    </button>
+                </div>
+
+                <div class="progress-wrap" id="progress-wrap">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" id="progress-fill"></div>
+                    </div>
+                    <span class="progress-label" id="progress-label">0%</span>
+                </div>
+            </div>
+
+
+            <div class="video-grid">
+                <div class="card video-card">
+                    <p class="card-title">Original Video</p>
+                    <div id="original-placeholder" class="video-placeholder">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="4"/>
+                            <polygon points="10 8 16 12 10 16 10 8"/>
+                            </svg>
+                            <span>No video selected</span>
+                    </div>
+                        <video id="original-video" controls></video>
+                </div>
+
+                    <div class="card video-card">
+                        <p class="card-title">Processed Video</p>
+                        <div id="original-placeholder2" style="display:none"></div>
+                        <div id="processed-placeholder" class="video-placeholder">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                            <span>Awaiting detection</span>
+                        </div>
+                        <video id="processed-video" controls></video>
+                        <span id="processed-badge" class="video-badge"></span>
+                    </div>
+                </div>
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <p class="stat-label">Max People Detected</p>
+                    <p class="stat-value accent" id="stat-count">-</p>
+                </div>
+
+                <div class="stat-card">
+                    <p class="stat-label">Model</p>
+                    <p class="stat-value" style="font-size:1.1rem;padding-top:6px;">YOLOv8n</p>
+                </div>
+
+                <div class="stat-card">
+                    <p class="stat-label">Status</p>
+                    <div style="padding-top:6px;">
+                        <span id="status-pill" class="status-pill ready">
+                            <span class="status-dot"></span>Ready
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script src="/static/js/main.js"></script>
+    </body>
+</html>
