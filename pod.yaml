@@ -1,0 +1,19 @@
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+  name: people-counter
+
+  labels:
+    app: people-counter
+
+spec:
+  containers:
+    - name: people-counter
+      image: anshydv8/people-counter:v1
+
+      imagePullPolicy: Always
+
+      ports:
+        - containerPort: 8000
