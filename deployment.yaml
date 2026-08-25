@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: people-counter
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: people-counter
+  
+  template:
+    metadata:
+      labels:
+        app: people-counter
+
+    spec:
+      containers:
+        - name: people-counter
+          image: anshydv8/people-counter:v1
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 8000
